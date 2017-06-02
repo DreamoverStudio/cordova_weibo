@@ -257,7 +257,49 @@ public class YCWeibo extends CordovaPlugin {
     private void sendSingleMessage(JSONObject params) {
         WeiboMessage weiboMessage = new WeiboMessage();
         try {
-            weiboMessage.mediaObject = getWebpageObj(params);
+            String type = params.getString("type");
+            if(type == 'text'){
+                TextObject textObject = new TextObject();
+                textObject.text = params.getString("title");
+                weiboMessage.textObject = textObject;
+
+            } else if (type == 'image') {
+                String image_path = params.getString("image");
+                if (text != null) {
+                    TextObject textObject = new TextObject();
+                    textObject.text = params.getString("title");
+                    weiboMessage.textObject = textObject;
+                }
+                if (image_path != null) {
+                    ImageObject imageObject = new ImageObject();
+                    if (image_path.startsWith("data")) {
+                        String dataUrl = image_path;
+                        String encodingPrefix = "base64,";
+                        int contentStartIndex = dataUrl.indexOf(encodingPrefix)
+                                + encodingPrefix.length();
+                        String resData = dataUrl.substring(contentStartIndex);
+
+                        byte[] bytes = null;
+                        try {
+                            bytes = Base64.decode(resData, 0);
+                        } catch (Exception ignored) {
+                            Log.e("Weibo", "Invalid Base64 string");
+                        }
+                        imageObject.imageData = bytes;
+                    } else if ( image_path.startsWith("http://") || image_path.startsWith("https://") ) {
+                        Bitmap bmp = null;
+                        bmp = BitmapFactory.decodeStream(new URL(image_path)
+                                .openStream());
+                        imageObject.setImageObject(bmp);
+                    } else {
+                        imageObject.imagePath = image_path;
+                    }
+                    weiboMessage.imageObject = imageObject;
+                }
+            }
+
+
+            // weiboMessage.mediaObject = getWebpageObj(params);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
