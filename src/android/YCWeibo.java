@@ -261,7 +261,8 @@ public class YCWeibo extends CordovaPlugin {
      * @param params
      */
     private void sendSingleMessage(JSONObject params) {
-        WeiboMessage weiboMessage = new WeiboMessage();
+        
+        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
         try {
             String type = params.getString("type");
             if(type.equals("text")){
@@ -304,7 +305,7 @@ public class YCWeibo extends CordovaPlugin {
                 }
             }
 
-
+            // WeiboMessage weiboMessage = new WeiboMessage();
             // weiboMessage.mediaObject = getWebpageObj(params);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
