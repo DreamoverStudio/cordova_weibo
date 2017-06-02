@@ -211,49 +211,49 @@ public class YCWeibo extends CordovaPlugin {
      * @return
      * @throws JSONException
      */
-    private WebpageObject getWebpageObj(JSONObject params) throws JSONException {
-        WebpageObject mediaObject = new WebpageObject();
-        mediaObject.identify = Utility.generateGUID();
-        mediaObject.title = params.getString("title");
-        mediaObject.description = params.getString("description");
-        if (params.getString("imageUrl") != null
-                && !params.getString("imageUrl").equalsIgnoreCase("")) {
-            try {
-                if (params.getString("imageUrl").startsWith("http://")
-                        || params.getString("imageUrl").startsWith("https://")) {
-                    Bitmap thumb = BitmapFactory.decodeStream(new URL(params
-                            .getString("imageUrl")).openConnection()
-                            .getInputStream());
-                    mediaObject.setThumbImage(thumb);
-                } else {
-                    currentCallbackContext.error(ERROR_IMAGE_URL);
-                }
+    // private WebpageObject getWebpageObj(JSONObject params) throws JSONException {
+    //     WebpageObject mediaObject = new WebpageObject();
+    //     mediaObject.identify = Utility.generateGUID();
+    //     mediaObject.title = params.getString("title");
+    //     mediaObject.description = params.getString("description");
+    //     if (params.getString("imageUrl") != null
+    //             && !params.getString("imageUrl").equalsIgnoreCase("")) {
+    //         try {
+    //             if (params.getString("imageUrl").startsWith("http://")
+    //                     || params.getString("imageUrl").startsWith("https://")) {
+    //                 Bitmap thumb = BitmapFactory.decodeStream(new URL(params
+    //                         .getString("imageUrl")).openConnection()
+    //                         .getInputStream());
+    //                 mediaObject.setThumbImage(thumb);
+    //             } else {
+    //                 currentCallbackContext.error(ERROR_IMAGE_URL);
+    //             }
 
-            } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                Bitmap thumb = BitmapFactory
-                        .decodeStream(new URL(DEFAULT_WEBPAGE_ICON)
-                                .openConnection().getInputStream());
-                mediaObject.setThumbImage(thumb);
-            } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        mediaObject.actionUrl = params.getString("url");
-        mediaObject.defaultText = params.getString("defaultText");
-        return mediaObject;
-    }
+    //         } catch (MalformedURLException e) {
+    //             // TODO Auto-generated catch block
+    //             e.printStackTrace();
+    //         } catch (IOException e) {
+    //             // TODO Auto-generated catch block
+    //             e.printStackTrace();
+    //         }
+    //     } else {
+    //         try {
+    //             Bitmap thumb = BitmapFactory
+    //                     .decodeStream(new URL(DEFAULT_WEBPAGE_ICON)
+    //                             .openConnection().getInputStream());
+    //             mediaObject.setThumbImage(thumb);
+    //         } catch (MalformedURLException e) {
+    //             // TODO Auto-generated catch block
+    //             e.printStackTrace();
+    //         } catch (IOException e) {
+    //             // TODO Auto-generated catch block
+    //             e.printStackTrace();
+    //         }
+    //     }
+    //     mediaObject.actionUrl = params.getString("url");
+    //     mediaObject.defaultText = params.getString("defaultText");
+    //     return mediaObject;
+    // }
 
     /**
      * 发送微博单条消息请求
