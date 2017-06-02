@@ -311,7 +311,7 @@ public class YCWeibo extends CordovaPlugin {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        SendMessageToWeiboRequest request = new SendMessageToWeiboRequest();
+        SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
         request.transaction = String.valueOf(System.currentTimeMillis());
         request.multiMessage = weiboMessage;
         if (mWeiboShareAPI.isWeiboAppInstalled()) {
