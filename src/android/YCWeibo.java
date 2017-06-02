@@ -258,12 +258,12 @@ public class YCWeibo extends CordovaPlugin {
         WeiboMessage weiboMessage = new WeiboMessage();
         try {
             String type = params.getString("type");
-            if(type.equals('text')){
+            if(type.equals("text")){
                 TextObject textObject = new TextObject();
                 textObject.text = params.getString("title");
                 weiboMessage.textObject = textObject;
 
-            } else if (type.equals('image')) {
+            } else if (type.equals("image")) {
                 String image_path = params.getString("image");
                 if (params.getString("title") != null) {
                     TextObject textObject = new TextObject();
