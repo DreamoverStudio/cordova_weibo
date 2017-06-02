@@ -180,6 +180,7 @@ public class YCWeibo extends CordovaPlugin {
         mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(
                 this.cordova.getActivity(), APP_KEY);
         mWeiboShareAPI.registerApp();
+
         cordova.getThreadPool().execute(new Runnable() {
 
             @Override
@@ -261,7 +262,7 @@ public class YCWeibo extends CordovaPlugin {
      * @param params
      */
     private void sendSingleMessage(JSONObject params) {
-        
+
         WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
         try {
             String type = params.getString("type");
@@ -294,15 +295,10 @@ public class YCWeibo extends CordovaPlugin {
                         }
                         imageObject.imageData = bytes;
                     } else if ( image_path.startsWith("http://") || image_path.startsWith("https://") ) {
-                        // try {
-                        //     Bitmap bmp = null;
-                        //     bmp = BitmapFactory.decodeStream(new URL(image_path)
-                        //             .openStream());
-                        //     imageObject.setImageObject(bmp);
-                        // } catch (JSONException e) {
-                        //     e.printStackTrace();
-                        // }
-                        
+                        Bitmap bmp = null;
+                        bmp = BitmapFactory.decodeStream(new URL(image_path).openStream());
+                        imageObject.setImageObject(bmp);
+
                     } else {
                         imageObject.imagePath = image_path;
                     }
@@ -315,10 +311,15 @@ public class YCWeibo extends CordovaPlugin {
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
         request.transaction = String.valueOf(System.currentTimeMillis());
         request.multiMessage = weiboMessage;
+
         if (mWeiboShareAPI.isWeiboAppInstalled()) {
             if (mWeiboShareAPI.isWeiboAppSupportAPI()) {
                 mWeiboShareAPI.sendRequest(this.cordova.getActivity(), request);
