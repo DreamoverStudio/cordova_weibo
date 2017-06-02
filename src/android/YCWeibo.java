@@ -300,7 +300,10 @@ public class YCWeibo extends CordovaPlugin {
                         imageObject.setImageObject(bmp);
 
                     } else {
+                        Bitmap bmp= BitmapFactory.decodeFile(image_path);
                         imageObject.imagePath = image_path;
+                        imageObject.setImageObject(bmp);
+//                        imageObject.imagePath = image_path;
                     }
                     weiboMessage.imageObject = imageObject;
                 }
