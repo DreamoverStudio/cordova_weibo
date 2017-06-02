@@ -294,14 +294,14 @@ public class YCWeibo extends CordovaPlugin {
                         }
                         imageObject.imageData = bytes;
                     } else if ( image_path.startsWith("http://") || image_path.startsWith("https://") ) {
-                        try {
-                            Bitmap bmp = null;
-                            bmp = BitmapFactory.decodeStream(new URL(image_path)
-                                    .openStream());
-                            imageObject.setImageObject(bmp);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        // try {
+                        //     Bitmap bmp = null;
+                        //     bmp = BitmapFactory.decodeStream(new URL(image_path)
+                        //             .openStream());
+                        //     imageObject.setImageObject(bmp);
+                        // } catch (JSONException e) {
+                        //     e.printStackTrace();
+                        // }
                         
                     } else {
                         imageObject.imagePath = image_path;
