@@ -66,6 +66,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
  *  @param command CDVInvokedUrlCommand
  */
 - (void)shareToWeibo:(CDVInvokedUrlCommand *)command {
+    
     self.callback = command.callbackId;
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = self.redirectURI;
@@ -100,7 +101,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
             if([image_path length] > 0){
                 WBImageObject *wbimage = [WBImageObject object];
                 NSData *image;
-                if([image_path hasPrefix:@"http://"]){
+                if([image_path hasPrefix:@"http://"] || [image_path hasPrefix:@"https://"]){
                     image = [NSData dataWithContentsOfURL: [NSURL URLWithString:image_path]];
                 }
                 else if([image_path hasPrefix:@"data:"]){
