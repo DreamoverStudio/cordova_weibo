@@ -301,7 +301,6 @@ public class YCWeibo extends CordovaPlugin {
 
                     } else {
                         Bitmap bmp= BitmapFactory.decodeFile(image_path);
-                        imageObject.imagePath = image_path;
                         imageObject.setImageObject(bmp);
 //                        imageObject.imagePath = image_path;
                     }
