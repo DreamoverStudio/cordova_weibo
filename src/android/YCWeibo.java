@@ -330,7 +330,7 @@ public class YCWeibo extends CordovaPlugin {
      *
      * @param request
      */
-    private void sendSingleMsgWithOutClient(SendMessageToWeiboRequest request) {
+    private void sendSingleMsgWithOutClient(SendMultiMessageToWeiboRequest request) {
         AuthInfo mAuthInfo = new AuthInfo(YCWeibo.this.cordova.getActivity(),
                 APP_KEY, REDIRECT_URL, SCOPE);
         Oauth2AccessToken accessToken = AccessTokenKeeper
